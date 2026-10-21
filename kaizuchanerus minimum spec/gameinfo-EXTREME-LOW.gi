@@ -339,7 +339,7 @@
 
         BakedLighting
         {
-            Version 4
+            Version 5
             ImportanceVolumeTransitionRegion 512            // distance we transition from high to low resolution charts 
             LightmapChannels
             {
@@ -971,10 +971,9 @@ citadel_melee_shake_duration 0
 citadel_melee_shake_amplitude 0
 
 
-//net_gather_child_fields_only 1 //experimental
-
 //cl_modifier_value_cache_enabled 1 //experimental
 
+citadel_unit_status_healthbar_highlight_speed "100"
 
 
 
