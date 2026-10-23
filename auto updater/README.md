@@ -8,7 +8,7 @@ I got annoyed with having to manually patch the file each time it updated, so he
 
 ## Quick start
 
-1. Copy `gameinfo-updater/` somewhere convenient (Desktop, Documents, etc.).
+1. Copy `auto updater/` somewhere convenient (Desktop, Documents, etc.).
 2. Rename `overrides.example.gi` → `overrides.gi` and edit it to your preferences.
 3. Run `python gameinfo_updater.py update`
 
