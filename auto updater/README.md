@@ -2,17 +2,55 @@
 
 I got annoyed with having to manually patch the file each time it updated, so heres a script to auto-update and apply overrides
 
-**Requirements:** Python 3.8+
+**What it does automatically:**
+- installs any config from this repo straight from GitHub, so you always get the latest patch
+- re-applies your personal convar locks from an `overrides.gi` file on top of every fresh config
+- shows what changed upstream and can print a full diff before writing anything
+- creates a timestamped backup before every write, with one-command rollback
+- remembers the config you picked and offers to update itself every 15 days
+- runs with no arguments: an interactive menu — just press a number
 
----
+![Interactive menu](images/menu.jpg)
 
-## Quick start
+## The interactive menu
+
+Run the script with no arguments and it opens a menu instead of an error:
+
+```
+Main Menu
+========================================================================
+1  Update gameinfo.gi now  (config: kaiz)
+2  Pick a config and update
+3  Backup current gameinfo.gi
+4  Restore the latest backup
+5  Check for a new script version
+q  Quit
+```
+
+- **Pick an action by pressing its number** — no commands to memorize.
+- **The screen is cleared between pages** (and on startup), so you only ever see the current screen; after an action finishes the script waits for Enter before returning to the menu, so you never lose its output.
+- **Config picker** (action 2) shows all available configs as a numbered list and marks the saved one.
+- **Remembered config** — when you pick a config, the script offers to remember it as the default (stored in `updater_config.json`); later runs use it automatically, and the menu shows it next to action 1. If the saved name is ever invalid, the script tells you and offers to erase it.
+- **Self-update** — at most once every 15 days the script offers to check GitHub for a newer version of itself and can install it in place (keeping a `.bak` of the old one). While the check is overdue, the menu points it out right on line 5.
+- **Colored output** — status tags `[+] / [!] / [x]`, section headers and a version banner. Colors turn off automatically when the output is piped somewhere.
+
+## Quick start (PowerShell — Windows, nothing to install)
+
+1. Copy `auto updater/` somewhere convenient (Desktop, Documents, etc.).
+2. Rename `overrides.example.gi` → `overrides.gi` and edit it to your preferences (or skip — the script works without it).
+3. Run:
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File "gameinfo_updater.ps1"
+```
+4. Press 1.
+
+Script will try to auto-detect gameinfo.gi location if not specified, and will use the overrides.gi file in the same directory as the script if not specified. Everything is driven through the menu — no flags needed.
+
+## Quick start (Python 3.8+)
 
 1. Copy `auto updater/` somewhere convenient (Desktop, Documents, etc.).
 2. Rename `overrides.example.gi` → `overrides.gi` and edit it to your preferences.
 3. Run `python gameinfo_updater.py update`
-
-Script will try to auto-detect gameinfo.gi location if not specified, and will use the overrides.gi file in the same directory as the script if not specified.
 
 ---
 

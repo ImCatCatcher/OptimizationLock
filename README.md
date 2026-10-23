@@ -57,6 +57,35 @@ I've probably put _at least_ five hundred hours into working on this project. I 
 To install the performance config replace the gameinfo.gi in `steamapps/common/deadlock/game/citadel` with the one downloaded from this repository.
 **There is a video tutorial** for installation available [here](https://youtu.be/TbjLbQVN2kE)
 
+---
+
+# Auto Updater — install & update the config automatically
+
+Tired of re-downloading and hand-editing gameinfo.gi every time the game patches? There is a script in this repo that does all of it for you: **[`auto updater/`](auto%20updater/)**
+
+![Interactive menu](auto%20updater/images/menu.jpg)
+
+**What it does automatically:**
+- installs any config from this repo straight from GitHub, so you always get the latest patch
+- keeps your personal tweaks: lock the convars you care about in `overrides.gi` and they are re-applied on top of every fresh config
+- shows what changed before writing anything (upstream convar changes, full diff)
+- creates a timestamped backup before every write, one command rolls you back
+- updates itself (offered at most every 15 days, with a notice right in the menu while the check is overdue)
+- interactive menu — run it and press a number, no commands to remember:
+  - the screen clears between pages, and after an action the script waits for Enter so you never miss its output
+  - the config picker marks your saved config; the script offers to remember the one you pick
+  - colored output with `[+] / [!] / [x]` status tags and a version banner
+
+**Quick start (Windows, no python needed):**
+```
+1. Copy the `auto updater` folder anywhere you like
+2. Run:  powershell -NoProfile -ExecutionPolicy Bypass -File "gameinfo_updater.ps1"
+3. Press 1
+```
+
+Full documentation lives in the script's own [README](auto%20updater/README.md).
+
+---
 ## Table
 
 Here is a list of each config provided in this repository.
@@ -112,7 +141,7 @@ No. Every config file included in this repo has mod support already added.
 - "How do I change my fov"  
   `citadel_camera_hero_fov` or `r_aspectratio` Comment this out or lower the value.
 - "The config broke this patch"  
-  The gameinfo.gi gets overwritten every major update. You need to manually replace it again.
+  The gameinfo.gi gets overwritten every major update. You need to manually replace it again — or use the [auto updater](auto%20updater/) to do it automatically.
 - "I can't see boxes past a certain distance"  
   `r_size_cull_threshold "0.7"`
 - "I can't see trooper healthbars past a certain distance"  
@@ -138,7 +167,7 @@ comment out ``r_farz`` or ``r_mapextents``.
 - "How do I change my fov"  
 ``citadel_camera_hero_fov`` or ``r_aspectratio`` Comment this out or lower the value.  
 - "The config broke this patch"
-The gameinfo.gi gets overwritten every major update. You need to manually replace it again.  
+The gameinfo.gi gets overwritten every major update. You need to manually replace it again — or use the [auto updater](auto%20updater/) to do it automatically.  
 - "I can't see boxes past a certain distance"  
 decrease ``r_size_cull_threshold``, for example ``r_size_cull_threshold "0.7"``
 - "I can't see trooper healthbars past a certain distance"  
